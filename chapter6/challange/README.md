@@ -22,5 +22,15 @@ docker run --name ch6-postgres -e POSTGRES_USER=chapter6 -e POSTGRES_PASSWORD=my
 psql -h 127.0.0.1 -U chapter6 -d chapter6db
 ```
 
+## Menjalankan Server
+
+Untuk menjalankan server, gunakan perintah berikut di terminal:
+
+```sh
+cd chapter6/challange/
+go run main.go
+```
+
+
 REFERNSI blog:
 https://www.suryahr.tech/blog/postgreql-with-docker
