@@ -23,18 +23,20 @@ func NewRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Save(user models.User) (models.User, error) {
-	if r.db == nil {
-		log.Fatalf("DB is nil in repository")
-	}
-	if &user == nil {
-		log.Fatalf("User is nil in Save method")
-	}
+	// if r.db == nil {
+	// 	log.Fatalf("DB is nil in repository")
+	// }
+	// if &user == nil {
+	// 	log.Fatalf("User is nil in Save method")
+	// }
 
 	err := r.db.Create(&user).Error
 	if err != nil {
+		log.Printf("Error saving user to database: %v", err)
 		return user, err
 	}
 
+	log.Printf("User saved to database with ID: %d", user.ID)
 	return user, nil
 }
 

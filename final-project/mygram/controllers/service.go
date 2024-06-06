@@ -27,8 +27,8 @@ func (s *service) RegisterUser(input RegisterUserInput) (models.User, error) {
 	user := models.User{}
 	user.Name = input.Name
 	user.Email = input.Email
-	user.Age = input.Age
 	user.Occupation = input.Occupation
+	user.Age = input.Age
 
 	passwordHash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
 	if err != nil {
@@ -36,11 +36,11 @@ func (s *service) RegisterUser(input RegisterUserInput) (models.User, error) {
 	}
 
 	user.PasswordHash = string(passwordHash)
-
 	log.Printf("Registering user: %+v", user)
 
 	newUser, err := s.repository.Save(user)
 	if err != nil {
+		log.Printf("Error saving new user: %v", err)
 		return newUser, err
 	}
 

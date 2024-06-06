@@ -20,11 +20,9 @@ func NewUserHandler(userService controllers.Service) *userHandler {
 func (h *userHandler) RegisterUser(c *gin.Context) {
 
 	var input controllers.RegisterUserInput
-
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
 		errors := helper.FormatValidationError(err)
-
 		errorMessage := gin.H{"errors": errors}
 		response := helper.APIResponse("Register account failed", http.StatusUnprocessableEntity, "error", errorMessage)
 
@@ -33,10 +31,8 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 	}
 
 	newUser, err := h.userService.RegisterUser(input)
-
-	if true {
-		response := helper.APIResponse("Register account failed", http.StatusBadRequest, "error", nil)
-
+	if err != nil {
+		response := helper.APIResponse("Register account failed", http.StatusBadRequest, "error", gin.H{"error": err.Error()})
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
@@ -49,7 +45,6 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 }
 
 func (h *userHandler) Login(c *gin.Context) {
-	// var input models.LoginInput
 	var input controllers.LoginInput
 
 	err := c.ShouldBindJSON(&input)
@@ -73,7 +68,6 @@ func (h *userHandler) Login(c *gin.Context) {
 	}
 
 	formatter := controllers.FormatUser(loggedinUser, "tokentokentoken")
-	// formatter := models.FormatUser(loggedinUser, "tokentokentoken")
 
 	response := helper.APIResponse("Successfuly loggedin", http.StatusOK, "success", formatter)
 	c.JSON(http.StatusOK, response)
