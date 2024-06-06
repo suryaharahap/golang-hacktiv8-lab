@@ -23,7 +23,7 @@ func InitDB() {
 		os.Getenv("DB_NAME"),
 		os.Getenv("DB_PORT"),
 	)
-	fmt.Println("DSN:", dsn)
+	// fmt.Println("DSN:", dsn)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

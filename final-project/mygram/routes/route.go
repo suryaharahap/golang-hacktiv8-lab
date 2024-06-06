@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"golang-hactiv8-lab/final-project/mygram/auth"
 	"golang-hactiv8-lab/final-project/mygram/controllers"
 	"golang-hactiv8-lab/final-project/mygram/handler"
 	"log"
@@ -24,7 +25,12 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 		log.Fatalf("userService is nil")
 	}
 
-	userHandler := handler.NewUserHandler(userService)
+	authServices := auth.NewService()
+	if authServices == nil {
+		log.Fatalf("authService is nil")
+	}
+
+	userHandler := handler.NewUserHandler(userService, authServices)
 	if userHandler == nil {
 		log.Fatalf("userHandler is nil")
 	}
