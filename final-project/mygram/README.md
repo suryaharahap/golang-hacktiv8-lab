@@ -17,23 +17,11 @@ cd final-project/mygram
 go run main.go
 ```
 
-PORT: 8083
+PORT: 8080
 
 
 REFERNSI blog:
 https://www.suryahr.tech/blog/postgreql-with-docker
 
 # ENDPOINT API - MyGram(app)
-## Users
-- url: `/users/register`
-- Type: `POST`
-- Request:
-  body:
-  ```json
-  {
-    "age": "integer",
-    "email": "string",
-    "password": "string",
-
-  }
-  ```
+Untuk endpoint API dapat di lihat di [Documentation ini](./docs/)
